@@ -4,33 +4,33 @@ import javax.swing.*;
 import java.util.Stack;
 
 public class Realization {
-    private static boolean pr(int a)
+    private static boolean symbolCheck(int a)
     {
         return ((a == ((int)'+')) || (a == ((int)'-')) || (a == ((int)'/')) || (a == ((int)'*')));
     }
     public static double result (String arr []){
-        Work<Double> lol = new Work<>();
+        Work<Double> stack = new Work<>();
         double a;
         double b;
         for (int i=0;i<arr.length;i++){
             if (arr[i].length()>=2){
-                lol.addLast(Double.parseDouble(arr[i]));
+                stack.addLast(Double.parseDouble(arr[i]));
                 continue;
             }
-            if (pr((int)arr[i].charAt(0)))
+            if (symbolCheck((int)arr[i].charAt(0)))
             {
-                b = lol.removeAndReturnFirst();
-                a = lol.removeAndReturnFirst();
+                b = stack.removeAndReturnFirst();
+                a = stack.removeAndReturnFirst();
                 switch (arr[i].charAt(0))
                 {
                     case '+':
-                        lol.addLast(a + b);
+                        stack.addLast(a + b);
                         break;
                     case '-':
-                        lol.addLast(a - b);
+                        stack.addLast(a - b);
                         break;
                     case '*':
-                        lol.addLast(a * b);
+                        stack.addLast(a * b);
                         break;
                     case '/':
                         if (b == 0)
@@ -40,14 +40,14 @@ public class Realization {
                         }
                         else
                         {
-                            lol.addLast(a / b);
+                            stack.addLast(a / b);
                             break;
                         }
                 }
             } else {
-                lol.addLast(Double.parseDouble(String.valueOf(arr[i])));
+                stack.addLast(Double.parseDouble(String.valueOf(arr[i])));
             }
         }
-        return lol.removeAndReturnFirst();
+        return stack.removeAndReturnFirst();
     }
 }
