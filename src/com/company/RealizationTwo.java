@@ -4,33 +4,33 @@ import javax.swing.*;
 import java.util.Stack;
 
 public class RealizationTwo {
-    private static boolean pr(int a)
+    private static boolean symbolCheck(int a)
     {
         return ((a == ((int)'+')) || (a == ((int)'-')) || (a == ((int)'/')) || (a == ((int)'*')));
     }
     public static double result (String arr []){
-        Stack<Double> lol = new Stack<Double>();
+        Stack<Double> stack = new Stack<Double>();
         double a;
         double b;
         for (int i=0;i<arr.length;i++){
             if (arr[i].length()>=2){
-                lol.push(Double.parseDouble(arr[i]));
+                stack.push(Double.parseDouble(arr[i]));
                 continue;
             }
-            if (pr((int)arr[i].charAt(0)))
+            if (symbolCheck((int)arr[i].charAt(0)))
             {
-                b = lol.pop();
-                a = lol.pop();
+                b = stack.pop();
+                a = stack.pop();
                 switch (arr[i].charAt(0))
                 {
                     case '+':
-                        lol.push(a + b);
+                        stack.push(a + b);
                         break;
                     case '-':
-                        lol.push(a - b);
+                        stack.push(a - b);
                         break;
                     case '*':
-                        lol.push(a * b);
+                        stack.push(a * b);
                         break;
                     case '/':
                         if (b == 0)
@@ -40,14 +40,14 @@ public class RealizationTwo {
                         }
                         else
                         {
-                            lol.push(a / b);
+                            stack.push(a / b);
                             break;
                         }
                 }
             } else {
-                lol.push(Double.parseDouble(String.valueOf(arr[i])));
+                stack.push(Double.parseDouble(String.valueOf(arr[i])));
             }
         }
-        return lol.pop();
+        return stack.pop();
     }
 }
